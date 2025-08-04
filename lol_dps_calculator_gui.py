@@ -9,9 +9,9 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-from lol_dps_calculator import calculateDPS
+from lol_dps_calculator import calculate_dps
 
-# atk_dmg, atk_speed, crit_chance, crit_multiplier, average_dps = calculateDPS()
+# stats = calculate_dps()
 
 # import threading
 
