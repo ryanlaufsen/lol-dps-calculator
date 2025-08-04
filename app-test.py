@@ -1,16 +1,22 @@
 from PyQt5.QtWidgets import QMainWindow, QApplication
 from PyQt5.QtCore import QTimer
 from lol_dps_calculator_gui import Ui_MainWindow
-from lol_dps_calculator import calculateDPS
+from lol_dps_calculator import calculate_dps
 
-atk_dmg, atk_speed, crit_chance, crit_multiplier, average_dps = calculateDPS()
+stats = calculate_dps()
 
 class AppWindow(QMainWindow):
     def __init__(self):
         super().__init__()
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
-        self.ui.retranslateUi(atk_dmg, atk_speed, crit_chance, crit_multiplier, average_dps)
+        self.ui.retranslateUi(
+            stats.attack_damage,
+            stats.attack_speed,
+            stats.crit_chance,
+            stats.crit_multiplier,
+            stats.average_dps,
+        )
         self.show()
 
 
@@ -19,9 +25,21 @@ def main():
     w = AppWindow()
 
     def getDPS():
-        atk_dmg, atk_speed, crit_chance, crit_multiplier, average_dps = calculateDPS()
-        w.ui.retranslateUi(atk_dmg, atk_speed, crit_chance, crit_multiplier, average_dps)
-        print(atk_dmg, atk_speed, crit_chance, crit_multiplier, average_dps)
+        data = calculate_dps()
+        w.ui.retranslateUi(
+            data.attack_damage,
+            data.attack_speed,
+            data.crit_chance,
+            data.crit_multiplier,
+            data.average_dps,
+        )
+        print(
+            data.attack_damage,
+            data.attack_speed,
+            data.crit_chance,
+            data.crit_multiplier,
+            data.average_dps,
+        )
 
     timer = QTimer(w)
     timer.timeout.connect(getDPS)
